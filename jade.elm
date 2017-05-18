@@ -3,6 +3,8 @@ import Html exposing (..)
 import Html.Events exposing (..)
 import Html.Attributes exposing (..)
 import String
+import Svg
+import Svg.Attributes as SvgAtt
 
 main : Program Never Model Msg
 main = program
@@ -119,6 +121,31 @@ view model =
   div []
     [playerInformationView model
     , allExAttributesView model
+    , pointDot True
+    , pointDot True
+    , pointDot False
+    , pointDot False
+    , pointDot False
+    ]
+
+pointDot : Bool -> Html msg
+pointDot filled =
+  Svg.svg
+    [ SvgAtt.width "20"
+    , SvgAtt.height "20"
+    ]
+    [ Svg.circle
+       [ SvgAtt.cx "10"
+       , SvgAtt.cy "10"
+       , SvgAtt.r "8"
+       , SvgAtt.stroke "black"
+       , SvgAtt.strokeWidth "2"
+       , if filled then
+          SvgAtt.fill "black"
+         else
+           SvgAtt.fill "white"
+       ]
+       []
     ]
 
 playerInformationView : Model -> Html Msg

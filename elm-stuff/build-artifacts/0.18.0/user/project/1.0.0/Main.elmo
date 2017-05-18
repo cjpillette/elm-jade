@@ -79,6 +79,51 @@ var _user$project$Main$simpleOption = function (val) {
 			_1: {ctor: '[]'}
 		});
 };
+var _user$project$Main$pointDot = function (filled) {
+	return A2(
+		_elm_lang$svg$Svg$svg,
+		{
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$width('20'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$height('20'),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$svg$Svg$circle,
+				{
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$cx('10'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$cy('10'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$r('8'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$stroke('black'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$strokeWidth('2'),
+									_1: {
+										ctor: '::',
+										_0: filled ? _elm_lang$svg$Svg_Attributes$fill('black') : _elm_lang$svg$Svg_Attributes$fill('white'),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}
+				},
+				{ctor: '[]'}),
+			_1: {ctor: '[]'}
+		});
+};
 var _user$project$Main$updateExAttributes = F3(
 	function (attributes, operation, exAttribute) {
 		var oldAttribute = A2(
@@ -371,7 +416,27 @@ var _user$project$Main$view = function (model) {
 			_1: {
 				ctor: '::',
 				_0: _user$project$Main$allExAttributesView(model),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: _user$project$Main$pointDot(true),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Main$pointDot(true),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Main$pointDot(false),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Main$pointDot(false),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Main$pointDot(false),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
 			}
 		});
 };
