@@ -13,16 +13,20 @@ main = program
   }
 
 init : (Model, Cmd Msg)
-init = (Model emptyPlayerInfo) ! []
+init = (Model emptyPlayerInfo emptyExAttributes) ! []
 
 
 -- Model
 type alias Model =
   { playerInformation : PlayerInformation
+  , exAttributes : ExAttributes
   }
 
 type alias PlayerInformation
   = Dict.Dict String (Maybe String)
+
+type alias ExAttributes
+  = Dict.Dict String Int
 
 emptyPlayerInfo : PlayerInformation
 emptyPlayerInfo =
@@ -35,10 +39,26 @@ emptyPlayerInfo =
     ,("SupernalAbility", Just "Flying")
     ]
 
+emptyExAttributes : ExAttributes
+emptyExAttributes =
+   Dict.fromList
+    [("Strength", 1)
+    , ("Dexterity", 1)
+    , ("Stamina", 1)
+    , ("Charisma", 1)
+    , ("Intelligence", 1)
+    , ("Wits", 1)
+    ]
+
 -- update
 
 type Msg
   = EditPlayerInformation String String
+  | EditExAttribute Operation String
+
+type Operation
+  = Increment
+  | Decrement
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
@@ -58,12 +78,47 @@ update msg model =
       in
         { model | playerInformation = newPlayerInfo} ! []
 
+    EditExAttribute operation exAttribute ->
+      { model | exAttributes =
+          updateExAttributes
+            model.exAttributes
+              operation
+              exAttribute } ! []
+
+
+updateExAttributes : ExAttributes -> Operation -> String -> ExAttributes
+updateExAttributes attributes operation exAttribute =
+  let
+    oldAttribute =
+      Dict.get exAttribute attributes
+      |> Maybe.withDefault 0
+  in
+    case operation of
+      Increment ->
+        if oldAttribute < 5 then
+          Dict.insert
+            exAttribute
+              (oldAttribute + 1)
+              attributes
+        else
+            attributes
+      Decrement ->
+        if oldAttribute > 1 then
+          Dict.insert
+            exAttribute
+              (oldAttribute - 1)
+              attributes
+        else
+          attributes
+
+
 -- view
 
 view : Model -> Html Msg
 view model =
   div []
     [playerInformationView model
+    , allExAttributesView model
     ]
 
 playerInformationView : Model -> Html Msg
@@ -117,7 +172,41 @@ supernalAbilities =
   , "Lay golden eggs"
   ]
 
+
 selectSupernalAbility : Html Msg
 selectSupernalAbility =
   select [onInput (EditPlayerInformation "SupernalAbility")]
         (List.map simpleOption supernalAbilities)
+
+
+-- Attributes section
+
+attributes : List String
+attributes =
+  ["Strength"
+  , "Dexterity"
+  , "Stamina"
+  , "Charisma"
+  , "Intelligence"
+  , "Wits"
+  ]
+
+allExAttributesView : Model -> Html Msg
+allExAttributesView model =
+  div []
+    (Dict.toList model.exAttributes
+    |> List.map exAttributeView
+    )
+
+exAttributeView : (String, Int) -> Html Msg
+exAttributeView ( exAttribute, exAttributeVal ) =
+  div []
+  [ text (exAttribute ++ " ")
+  , text (toString exAttributeVal)
+  , button
+    [ onClick (EditExAttribute Decrement exAttribute)]
+    [ text "-"]
+  , button
+    [ onClick (EditExAttribute Increment exAttribute)]
+    [ text "+"]
+  ]
