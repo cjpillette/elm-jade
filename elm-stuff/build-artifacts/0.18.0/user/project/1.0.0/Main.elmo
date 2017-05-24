@@ -1,22 +1,133 @@
-var _user$project$Main$attributes = {
+var _user$project$Main$simpleOption = function (val) {
+	return A2(
+		_elm_lang$html$Html$option,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$value(val),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text(val),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Main$castes = {
 	ctor: '::',
-	_0: 'Strength',
+	_0: 'Zenith',
 	_1: {
 		ctor: '::',
-		_0: 'Dexterity',
+		_0: 'Sunray',
 		_1: {
 			ctor: '::',
-			_0: 'Stamina',
+			_0: 'Eclipse',
 			_1: {
 				ctor: '::',
-				_0: 'Charisma',
+				_0: 'Stardust',
+				_1: {ctor: '[]'}
+			}
+		}
+	}
+};
+var _user$project$Main$abilities = {
+	ctor: '::',
+	_0: 'Archery',
+	_1: {
+		ctor: '::',
+		_0: 'Athletics',
+		_1: {
+			ctor: '::',
+			_0: 'Awareness',
+			_1: {
+				ctor: '::',
+				_0: 'Brawl',
 				_1: {
 					ctor: '::',
-					_0: 'Intelligence',
+					_0: 'Bureaucracy',
 					_1: {
 						ctor: '::',
-						_0: 'Wits',
-						_1: {ctor: '[]'}
+						_0: 'Craft',
+						_1: {
+							ctor: '::',
+							_0: 'Dodge',
+							_1: {
+								ctor: '::',
+								_0: 'Integrity',
+								_1: {
+									ctor: '::',
+									_0: 'Investigation',
+									_1: {
+										ctor: '::',
+										_0: 'Larceny',
+										_1: {
+											ctor: '::',
+											_0: 'Linguistics',
+											_1: {
+												ctor: '::',
+												_0: 'Lore',
+												_1: {
+													ctor: '::',
+													_0: 'Martial Arts',
+													_1: {
+														ctor: '::',
+														_0: 'Medicine',
+														_1: {
+															ctor: '::',
+															_0: 'Melee',
+															_1: {
+																ctor: '::',
+																_0: 'Occult',
+																_1: {
+																	ctor: '::',
+																	_0: 'Performance',
+																	_1: {
+																		ctor: '::',
+																		_0: 'Presence',
+																		_1: {
+																			ctor: '::',
+																			_0: 'Resistance',
+																			_1: {
+																				ctor: '::',
+																				_0: 'Ride',
+																				_1: {
+																					ctor: '::',
+																					_0: 'Sail',
+																					_1: {
+																						ctor: '::',
+																						_0: 'Socialize',
+																						_1: {
+																							ctor: '::',
+																							_0: 'Stealth',
+																							_1: {
+																								ctor: '::',
+																								_0: 'Survival',
+																								_1: {
+																									ctor: '::',
+																									_0: 'Thrown',
+																									_1: {
+																										ctor: '::',
+																										_0: 'War',
+																										_1: {ctor: '[]'}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
 					}
 				}
 			}
@@ -48,122 +159,315 @@ var _user$project$Main$supernalAbilities = {
 		}
 	}
 };
-var _user$project$Main$castes = {
+var _user$project$Main$attributes = {
 	ctor: '::',
-	_0: 'Zenith',
+	_0: 'Strength',
 	_1: {
 		ctor: '::',
-		_0: 'Sunray',
+		_0: 'Dexterity',
 		_1: {
 			ctor: '::',
-			_0: 'Eclipse',
+			_0: 'Stamina',
 			_1: {
 				ctor: '::',
-				_0: 'Stardust',
-				_1: {ctor: '[]'}
+				_0: 'Charisma',
+				_1: {
+					ctor: '::',
+					_0: 'Manipulation',
+					_1: {
+						ctor: '::',
+						_0: 'Appearance',
+						_1: {
+							ctor: '::',
+							_0: 'Perception',
+							_1: {
+								ctor: '::',
+								_0: 'Intelligence',
+								_1: {
+									ctor: '::',
+									_0: 'Wits',
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	}
 };
-var _user$project$Main$simpleOption = function (val) {
-	return A2(
-		_elm_lang$html$Html$option,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$value(val),
-			_1: {ctor: '[]'}
+var _user$project$Main$toggleCasteOrFavoured = F2(
+	function (exAbility, exAbilities) {
+		var _p0 = A2(
+			_elm_lang$core$Maybe$withDefault,
+			{ctor: '_Tuple2', _0: false, _1: 0},
+			A2(_elm_lang$core$Dict$get, exAbility, exAbilities));
+		var favoured = _p0._0;
+		var abilityValue = _p0._1;
+		var toggleFavoured = {ctor: '_Tuple2', _0: !favoured, _1: abilityValue};
+		return A3(_elm_lang$core$Dict$insert, exAbility, toggleFavoured, exAbilities);
+	});
+var _user$project$Main$updateExAbilities = F3(
+	function (exAbilities, exAbility, abilityValue) {
+		var _p1 = A2(
+			_elm_lang$core$Maybe$withDefault,
+			{ctor: '_Tuple2', _0: false, _1: 0},
+			A2(_elm_lang$core$Dict$get, exAbility, exAbilities));
+		var favoured = _p1._0;
+		var updatedValue = {ctor: '_Tuple2', _0: favoured, _1: abilityValue};
+		return A3(_elm_lang$core$Dict$insert, exAbility, updatedValue, exAbilities);
+	});
+var _user$project$Main$updateExAttributes = F3(
+	function (attributes, exAttribute, attributeValue) {
+		return A3(_elm_lang$core$Dict$insert, exAttribute, attributeValue, attributes);
+	});
+var _user$project$Main$update = F2(
+	function (msg, model) {
+		var _p2 = msg;
+		switch (_p2.ctor) {
+			case 'EditPlayerInformation':
+				var _p3 = _p2._1;
+				var newPlayerInfo = A3(
+					_elm_lang$core$Dict$insert,
+					_p2._0,
+					(_elm_lang$core$Native_Utils.cmp(
+						_elm_lang$core$String$length(_p3),
+						0) > 0) ? _elm_lang$core$Maybe$Just(_p3) : _elm_lang$core$Maybe$Nothing,
+					model.playerInformation);
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{playerInformation: newPlayerInfo}),
+					{ctor: '[]'});
+			case 'EditExAttribute':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							exAttributes: A3(_user$project$Main$updateExAttributes, model.exAttributes, _p2._0, _p2._1)
+						}),
+					{ctor: '[]'});
+			case 'EditExAbility':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							exAbilities: A3(_user$project$Main$updateExAbilities, model.exAbilities, _p2._0, _p2._1)
+						}),
+					{ctor: '[]'});
+			default:
+				var exAbilities = A2(_user$project$Main$toggleCasteOrFavoured, _p2._0, model.exAbilities);
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{exAbilities: exAbilities}),
+					{ctor: '[]'});
+		}
+	});
+var _user$project$Main$emptyExAbilities = _elm_lang$core$Dict$fromList(
+	{
+		ctor: '::',
+		_0: {
+			ctor: '_Tuple2',
+			_0: 'Archery',
+			_1: {ctor: '_Tuple2', _0: false, _1: 0}
 		},
-		{
+		_1: {
 			ctor: '::',
-			_0: _elm_lang$html$Html$text(val),
-			_1: {ctor: '[]'}
-		});
-};
-var _user$project$Main$pointDot = function (filled) {
-	return A2(
-		_elm_lang$svg$Svg$svg,
-		{
-			ctor: '::',
-			_0: _elm_lang$svg$Svg_Attributes$width('20'),
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'Athletics',
+				_1: {ctor: '_Tuple2', _0: false, _1: 0}
+			},
 			_1: {
 				ctor: '::',
-				_0: _elm_lang$svg$Svg_Attributes$height('20'),
-				_1: {ctor: '[]'}
-			}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$svg$Svg$circle,
-				{
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'Awareness',
+					_1: {ctor: '_Tuple2', _0: false, _1: 0}
+				},
+				_1: {
 					ctor: '::',
-					_0: _elm_lang$svg$Svg_Attributes$cx('10'),
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'Brawl',
+						_1: {ctor: '_Tuple2', _0: false, _1: 0}
+					},
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$svg$Svg_Attributes$cy('10'),
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'Bureaucracy',
+							_1: {ctor: '_Tuple2', _0: false, _1: 0}
+						},
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$svg$Svg_Attributes$r('8'),
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'Craft',
+								_1: {ctor: '_Tuple2', _0: false, _1: 0}
+							},
 							_1: {
 								ctor: '::',
-								_0: _elm_lang$svg$Svg_Attributes$stroke('black'),
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'Dodge',
+									_1: {ctor: '_Tuple2', _0: false, _1: 0}
+								},
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$svg$Svg_Attributes$strokeWidth('2'),
+									_0: {
+										ctor: '_Tuple2',
+										_0: 'Integrity',
+										_1: {ctor: '_Tuple2', _0: false, _1: 0}
+									},
 									_1: {
 										ctor: '::',
-										_0: filled ? _elm_lang$svg$Svg_Attributes$fill('black') : _elm_lang$svg$Svg_Attributes$fill('white'),
-										_1: {ctor: '[]'}
+										_0: {
+											ctor: '_Tuple2',
+											_0: 'Investigation',
+											_1: {ctor: '_Tuple2', _0: false, _1: 0}
+										},
+										_1: {
+											ctor: '::',
+											_0: {
+												ctor: '_Tuple2',
+												_0: 'Larceny',
+												_1: {ctor: '_Tuple2', _0: false, _1: 0}
+											},
+											_1: {
+												ctor: '::',
+												_0: {
+													ctor: '_Tuple2',
+													_0: 'Linguistics',
+													_1: {ctor: '_Tuple2', _0: false, _1: 0}
+												},
+												_1: {
+													ctor: '::',
+													_0: {
+														ctor: '_Tuple2',
+														_0: 'Lore',
+														_1: {ctor: '_Tuple2', _0: false, _1: 0}
+													},
+													_1: {
+														ctor: '::',
+														_0: {
+															ctor: '_Tuple2',
+															_0: 'Martial Arts',
+															_1: {ctor: '_Tuple2', _0: false, _1: 0}
+														},
+														_1: {
+															ctor: '::',
+															_0: {
+																ctor: '_Tuple2',
+																_0: 'Medecine',
+																_1: {ctor: '_Tuple2', _0: false, _1: 0}
+															},
+															_1: {
+																ctor: '::',
+																_0: {
+																	ctor: '_Tuple2',
+																	_0: 'Melee',
+																	_1: {ctor: '_Tuple2', _0: false, _1: 0}
+																},
+																_1: {
+																	ctor: '::',
+																	_0: {
+																		ctor: '_Tuple2',
+																		_0: 'Occult',
+																		_1: {ctor: '_Tuple2', _0: false, _1: 0}
+																	},
+																	_1: {
+																		ctor: '::',
+																		_0: {
+																			ctor: '_Tuple2',
+																			_0: 'Performance',
+																			_1: {ctor: '_Tuple2', _0: false, _1: 0}
+																		},
+																		_1: {
+																			ctor: '::',
+																			_0: {
+																				ctor: '_Tuple2',
+																				_0: 'Presence',
+																				_1: {ctor: '_Tuple2', _0: false, _1: 0}
+																			},
+																			_1: {
+																				ctor: '::',
+																				_0: {
+																					ctor: '_Tuple2',
+																					_0: 'Ride',
+																					_1: {ctor: '_Tuple2', _0: false, _1: 0}
+																				},
+																				_1: {
+																					ctor: '::',
+																					_0: {
+																						ctor: '_Tuple2',
+																						_0: 'Sail',
+																						_1: {ctor: '_Tuple2', _0: false, _1: 0}
+																					},
+																					_1: {
+																						ctor: '::',
+																						_0: {
+																							ctor: '_Tuple2',
+																							_0: 'Socialize',
+																							_1: {ctor: '_Tuple2', _0: false, _1: 0}
+																						},
+																						_1: {
+																							ctor: '::',
+																							_0: {
+																								ctor: '_Tuple2',
+																								_0: 'Stealth',
+																								_1: {ctor: '_Tuple2', _0: false, _1: 0}
+																							},
+																							_1: {
+																								ctor: '::',
+																								_0: {
+																									ctor: '_Tuple2',
+																									_0: 'Survival',
+																									_1: {ctor: '_Tuple2', _0: false, _1: 0}
+																								},
+																								_1: {
+																									ctor: '::',
+																									_0: {
+																										ctor: '_Tuple2',
+																										_0: 'Thrown',
+																										_1: {ctor: '_Tuple2', _0: false, _1: 0}
+																									},
+																									_1: {
+																										ctor: '::',
+																										_0: {
+																											ctor: '_Tuple2',
+																											_0: 'War',
+																											_1: {ctor: '_Tuple2', _0: false, _1: 0}
+																										},
+																										_1: {ctor: '[]'}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
 									}
 								}
 							}
 						}
 					}
-				},
-				{ctor: '[]'}),
-			_1: {ctor: '[]'}
-		});
-};
-var _user$project$Main$updateExAttributes = F3(
-	function (attributes, operation, exAttribute) {
-		var oldAttribute = A2(
-			_elm_lang$core$Maybe$withDefault,
-			0,
-			A2(_elm_lang$core$Dict$get, exAttribute, attributes));
-		var _p0 = operation;
-		if (_p0.ctor === 'Increment') {
-			return (_elm_lang$core$Native_Utils.cmp(oldAttribute, 5) < 0) ? A3(_elm_lang$core$Dict$insert, exAttribute, oldAttribute + 1, attributes) : attributes;
-		} else {
-			return (_elm_lang$core$Native_Utils.cmp(oldAttribute, 1) > 0) ? A3(_elm_lang$core$Dict$insert, exAttribute, oldAttribute - 1, attributes) : attributes;
-		}
-	});
-var _user$project$Main$update = F2(
-	function (msg, model) {
-		var _p1 = msg;
-		if (_p1.ctor === 'EditPlayerInformation') {
-			var _p2 = _p1._1;
-			var newPlayerInfo = A3(
-				_elm_lang$core$Dict$insert,
-				_p1._0,
-				(_elm_lang$core$Native_Utils.cmp(
-					_elm_lang$core$String$length(_p2),
-					0) > 0) ? _elm_lang$core$Maybe$Just(_p2) : _elm_lang$core$Maybe$Nothing,
-				model.playerInformation);
-			return A2(
-				_elm_lang$core$Platform_Cmd_ops['!'],
-				_elm_lang$core$Native_Utils.update(
-					model,
-					{playerInformation: newPlayerInfo}),
-				{ctor: '[]'});
-		} else {
-			return A2(
-				_elm_lang$core$Platform_Cmd_ops['!'],
-				_elm_lang$core$Native_Utils.update(
-					model,
-					{
-						exAttributes: A3(_user$project$Main$updateExAttributes, model.exAttributes, _p1._0, _p1._1)
-					}),
-				{ctor: '[]'});
+				}
+			}
 		}
 	});
 var _user$project$Main$emptyExAttributes = _elm_lang$core$Dict$fromList(
@@ -226,18 +530,376 @@ var _user$project$Main$emptyPlayerInfo = _elm_lang$core$Dict$fromList(
 			}
 		}
 	});
-var _user$project$Main$Model = F2(
-	function (a, b) {
-		return {playerInformation: a, exAttributes: b};
+var _user$project$Main$Model = F3(
+	function (a, b, c) {
+		return {playerInformation: a, exAttributes: b, exAbilities: c};
 	});
 var _user$project$Main$init = A2(
 	_elm_lang$core$Platform_Cmd_ops['!'],
-	A2(_user$project$Main$Model, _user$project$Main$emptyPlayerInfo, _user$project$Main$emptyExAttributes),
+	A3(_user$project$Main$Model, _user$project$Main$emptyPlayerInfo, _user$project$Main$emptyExAttributes, _user$project$Main$emptyExAbilities),
 	{ctor: '[]'});
+var _user$project$Main$ToggleCasteOrFavoured = function (a) {
+	return {ctor: 'ToggleCasteOrFavoured', _0: a};
+};
+var _user$project$Main$casteOrFavouredBox = F2(
+	function (exAbility, casteOrFavoured) {
+		return A2(
+			_elm_lang$svg$Svg$svg,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$width('18'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$height('18'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(
+							_user$project$Main$ToggleCasteOrFavoured(exAbility)),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$svg$Svg$rect,
+					{
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$width('18'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$height('18'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$stroke('black'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$strokeWidth('4'),
+									_1: {
+										ctor: '::',
+										_0: casteOrFavoured ? _elm_lang$svg$Svg_Attributes$fill('black') : _elm_lang$svg$Svg_Attributes$fill('white'),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			});
+	});
+var _user$project$Main$EditExAbility = F2(
+	function (a, b) {
+		return {ctor: 'EditExAbility', _0: a, _1: b};
+	});
+var _user$project$Main$abilityDot = F3(
+	function (exAbility, abilityValue, filled) {
+		return A2(
+			_elm_lang$svg$Svg$svg,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$width('20'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$height('20'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(
+							A2(_user$project$Main$EditExAbility, exAbility, abilityValue)),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$svg$Svg$circle,
+					{
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$cx('10'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$cy('10'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$r('8'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$stroke('black'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$strokeWidth('2'),
+										_1: {
+											ctor: '::',
+											_0: filled ? _elm_lang$svg$Svg_Attributes$fill('black') : _elm_lang$svg$Svg_Attributes$fill('white'),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			});
+	});
+var _user$project$Main$exAbilityView = F2(
+	function (exAbilities, exAbility) {
+		var _p4 = A2(
+			_elm_lang$core$Maybe$withDefault,
+			{ctor: '_Tuple2', _0: false, _1: 0},
+			A2(_elm_lang$core$Dict$get, exAbility, exAbilities));
+		var favoured = _p4._0;
+		var exAbilityVal = _p4._1;
+		var filledList = A3(
+			_elm_lang$core$List$map2,
+			F2(
+				function (ref, val) {
+					return _elm_lang$core$Native_Utils.cmp(ref, val) > -1;
+				}),
+			A2(_elm_lang$core$List$repeat, 5, exAbilityVal),
+			A2(_elm_lang$core$List$range, 1, 5));
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(_user$project$Main$casteOrFavouredBox, exAbility, favoured),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(exAbility),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
+							A3(
+								_elm_lang$core$List$map2,
+								_user$project$Main$abilityDot(exAbility),
+								A2(_elm_lang$core$List$range, 1, 5),
+								filledList)),
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+	});
+var _user$project$Main$allAbilitiesView = function (exAbilities) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$h2,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('Abilities'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			},
+			A2(
+				_elm_lang$core$List$map,
+				_user$project$Main$exAbilityView(exAbilities),
+				_user$project$Main$abilities)));
+};
 var _user$project$Main$EditExAttribute = F2(
 	function (a, b) {
 		return {ctor: 'EditExAttribute', _0: a, _1: b};
 	});
+var _user$project$Main$attributeDot = F3(
+	function (exAttribute, attributeValue, filled) {
+		return A2(
+			_elm_lang$svg$Svg$svg,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$width('20'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$height('20'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(
+							A2(_user$project$Main$EditExAttribute, exAttribute, attributeValue)),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$svg$Svg$circle,
+					{
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$cx('10'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$cy('10'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$r('8'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$stroke('black'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$strokeWidth('2'),
+										_1: {
+											ctor: '::',
+											_0: filled ? _elm_lang$svg$Svg_Attributes$fill('black') : _elm_lang$svg$Svg_Attributes$fill('white'),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			});
+	});
+var _user$project$Main$exAttributeView = F2(
+	function (exAttributes, exAttribute) {
+		var exAttributeVal = A2(
+			_elm_lang$core$Maybe$withDefault,
+			1,
+			A2(_elm_lang$core$Dict$get, exAttribute, exAttributes));
+		var filledList = A3(
+			_elm_lang$core$List$map2,
+			F2(
+				function (ref, val) {
+					return _elm_lang$core$Native_Utils.cmp(ref, val) > -1;
+				}),
+			A2(_elm_lang$core$List$repeat, 5, exAttributeVal),
+			A2(_elm_lang$core$List$range, 1, 5));
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(exAttribute),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						A3(
+							_elm_lang$core$List$map2,
+							_user$project$Main$attributeDot(exAttribute),
+							A2(_elm_lang$core$List$range, 1, 5),
+							filledList)),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _user$project$Main$physicalAttributes = function (exAttributes) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h3,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Social'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(_user$project$Main$exAttributeView, exAttributes, 'Strength'),
+				_1: {
+					ctor: '::',
+					_0: A2(_user$project$Main$exAttributeView, exAttributes, 'Dexterity'),
+					_1: {
+						ctor: '::',
+						_0: A2(_user$project$Main$exAttributeView, exAttributes, 'Stamina'),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _user$project$Main$socialAttributes = function (exAttributes) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h3,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Social'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(_user$project$Main$exAttributeView, exAttributes, 'Charisma'),
+				_1: {
+					ctor: '::',
+					_0: A2(_user$project$Main$exAttributeView, exAttributes, 'Manipulation'),
+					_1: {
+						ctor: '::',
+						_0: A2(_user$project$Main$exAttributeView, exAttributes, 'Appearance'),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _user$project$Main$mentalAttributes = function (exAttributes) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h3,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Mental'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(_user$project$Main$exAttributeView, exAttributes, 'Perception'),
+				_1: {
+					ctor: '::',
+					_0: A2(_user$project$Main$exAttributeView, exAttributes, 'Intelligence'),
+					_1: {
+						ctor: '::',
+						_0: A2(_user$project$Main$exAttributeView, exAttributes, 'Wits'),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _user$project$Main$allExAttributesView = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _user$project$Main$physicalAttributes(model.exAttributes),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Main$socialAttributes(model.exAttributes),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Main$mentalAttributes(model.exAttributes),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
 var _user$project$Main$EditPlayerInformation = F2(
 	function (a, b) {
 		return {ctor: 'EditPlayerInformation', _0: a, _1: b};
@@ -345,67 +1007,6 @@ var _user$project$Main$playerInformationView = function (model) {
 			}
 		});
 };
-var _user$project$Main$Decrement = {ctor: 'Decrement'};
-var _user$project$Main$Increment = {ctor: 'Increment'};
-var _user$project$Main$exAttributeView = function (_p3) {
-	var _p4 = _p3;
-	var _p5 = _p4._0;
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html$text(
-				A2(_elm_lang$core$Basics_ops['++'], _p5, ' ')),
-			_1: {
-				ctor: '::',
-				_0: _elm_lang$html$Html$text(
-					_elm_lang$core$Basics$toString(_p4._1)),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$button,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick(
-								A2(_user$project$Main$EditExAttribute, _user$project$Main$Decrement, _p5)),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('-'),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$button,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(
-									A2(_user$project$Main$EditExAttribute, _user$project$Main$Increment, _p5)),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('+'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}
-				}
-			}
-		});
-};
-var _user$project$Main$allExAttributesView = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		A2(
-			_elm_lang$core$List$map,
-			_user$project$Main$exAttributeView,
-			_elm_lang$core$Dict$toList(model.exAttributes)));
-};
 var _user$project$Main$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -418,24 +1019,8 @@ var _user$project$Main$view = function (model) {
 				_0: _user$project$Main$allExAttributesView(model),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Main$pointDot(true),
-					_1: {
-						ctor: '::',
-						_0: _user$project$Main$pointDot(true),
-						_1: {
-							ctor: '::',
-							_0: _user$project$Main$pointDot(false),
-							_1: {
-								ctor: '::',
-								_0: _user$project$Main$pointDot(false),
-								_1: {
-									ctor: '::',
-									_0: _user$project$Main$pointDot(false),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}
+					_0: _user$project$Main$allAbilitiesView(model.exAbilities),
+					_1: {ctor: '[]'}
 				}
 			}
 		});
@@ -445,7 +1030,9 @@ var _user$project$Main$main = _elm_lang$html$Html$program(
 		init: _user$project$Main$init,
 		view: _user$project$Main$view,
 		update: _user$project$Main$update,
-		subscriptions: function (_p6) {
+		subscriptions: function (_p5) {
 			return _elm_lang$core$Platform_Sub$none;
 		}
 	})();
+var _user$project$Main$Decrement = {ctor: 'Decrement'};
+var _user$project$Main$Increment = {ctor: 'Increment'};
